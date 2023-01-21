@@ -11,7 +11,10 @@ const port = process.env.PORT || 8080;
 //  MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+app.use(cors({
+  origin: 'https://instockv1.vercel.app'
+}));
+
 
 //  ROUTES
 app.use("/warehouses", warehouseRoutes);
