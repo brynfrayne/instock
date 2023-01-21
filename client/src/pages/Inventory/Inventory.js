@@ -27,7 +27,7 @@ export default function Inventory() {
           "Actions",
         ]}
       />
-      <InventoryList inventories={this.state.inventory} />
+      <InventoryList inventories={inventory} />
     </div>
   );
 }

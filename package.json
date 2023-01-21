@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.17.2",
+    "react-app-env": "^1.2.3",
     "uniqid": "^5.4.0"
   }
 }
