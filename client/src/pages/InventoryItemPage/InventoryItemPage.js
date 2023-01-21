@@ -1,31 +1,28 @@
-import React from 'react'
 import InventoryItemHero from '../../components/InventoryItemHero/InventoryItemHero';
 import "./InventoryItemPage.scss";
 import axios from 'axios';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 
-export default class InventoryItemPage extends Component{
-    state = {
-        item: null,
-    };
-  
-    
-    
-    componentDidMount() {
-        const id = this.props.match.params.itemId;
-        console.log(id)
-        axios.get('http://localhost:8080/inventory/'+id +'/item').then(response => {
-        console.log(response.data)    
-        this.setState({
-            item:response.data,
-        })
 
-    })};
-    render(){
-    if (this.state.item === null) {
-        return <span>Loading...</span>;
-        }
+export default function InventoryItemPage({match}) {
+    const [item, setItem] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    useEffect(() => {
+        const id = match.params.itemId;
+        axios.get(`${apiUrl}/inventory/${id}/item`)
+            .then((response) => {
+                setItem(response.data);
+                setLoading(false);
+            });
+    }, []);
+
     return (
+        <div>
+            {loading ? (
+                <span>Loading...</span>
+            ) : (
         <div className="main">
            <InventoryItemHero  title={this.state.item.itemName} inventoryId={this.props.match.params.itemId}/>
             <div className="inventory-item">
@@ -56,7 +53,9 @@ export default class InventoryItemPage extends Component{
                         <p className="inventory-item__text">{this.state.item.warehouseName}</p>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
+)}
+</div>
     )
-}}
+}

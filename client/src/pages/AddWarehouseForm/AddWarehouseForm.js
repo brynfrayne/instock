@@ -2,72 +2,55 @@ import React from 'react'
 import backImg from '../../assets/icons/arrow_back-24px.svg';
 import "./AddWarehouseForm.scss";
 import { NavLink } from 'react-router-dom';
-import { Component } from 'react';
-import uniqid from 'uniqid'; 
+import uniqid from 'uniqid';
 import axios from 'axios';
 import error from "../../assets/icons/error-24px.svg";
 
-
-export default class AddWarehouseForm extends Component {
-    handleSubmit = (event) => {
+export default function AddWarehouseForm() {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const handleSubmit = (event) => {
         event.preventDefault();
-        
         const validRegexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         const validRegexPhone = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g
-        
-        if (!event.target.name.value || !event.target.address.value || !event.target.city.value || !event.target.country.value || !event.target.contactName.value ||!event.target.position.value || !event.target.phone.value || !event.target.email.value ){
-           const input = document.getElementsByTagName('input');
-            for (let i = 0; i < input.length; i++) {
-            input[i].style.borderColor = "red";
-            }
-        
-           
-        const span = document.getElementsByTagName('span');
-        for (let i = 0; i<span.length; i++) {
-            console.log(span[i])
-            span[i].classList.remove("form-valid");
-            span[i].classList.add("form-error")
-        }
 
-           return alert("Please fill in all values."); 
-        };
-        if (!event.target.phone.value.match(validRegexPhone)) {
-            return alert("Please enter valid phone number!")
-        }
-        if (!event.target.email.value.match(validRegexEmail)) {
-            return alert("Please enter valid email: example@email.com");
-        } 
-           axios.post('http://localhost:8080/warehouses', {
-            name: event.target.name.value,
-            address: event.target.address.value,
-            city: event.target.city.value,
-            country: event.target.country.value,
-            contact: {
-                name: event.target.contactName.value,
-                position: event.target.position.value,
-                phone: event.target.phone.value,
-                email: event.target.email.value
+        if (!event.target.name.value || !event.target.address.value || !event.target.city.value || !event.target.country.value || !event.target.contactName.value ||!event.target.position.value || !event.target.phone.value || !event.target.email.value) {
+            alert("Please fill out all fields");
+        } else if (!validRegexEmail.test(event.target.email.value)) {
+            alert("Please enter a valid email address");
+        } else if (!validRegexPhone.test(event.target.phone.value)) {
+            alert("Please enter a valid phone number");
+        } else {
+            const newWarehouse = {
+                id: uniqid(),
+                name: event.target.name.value,
+                address: event.target.address.value,
+                city: event.target.city.value,
+                country: event.target.country.value,
+                contact: {
+                    name: event.target.contactName.value,
+                    position: event.target.position.value,
+                    phone: event.target.phone.value,
+                    email: event.target.email.value
+                }
             }
-            
-        }).then(response => {
-            alert("Warehouse added 👌")
-        }).then(response => {
-            this.props.history.push('/warehouses');
-        })
-    };
-
-         
-    
-    render(){
-   
-    
+            axios.post(apiUrl + '/warehouses', newWarehouse)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            alert("Warehouse added successfully");
+            event.target.reset();
+        }
+    }
     return (
         <div className="main">
             <div className="add-warehouse__header">
-                
+
                 <h2><NavLink to='/warehouses'><img className="add-warehouse__back-icon" src={backImg} alt="" /></ NavLink> Add New Warehouse</h2>
             </div>
-            <form onSubmit={this.handleSubmit} id='addWarehouse' className="add-warehouse__form-container" noValidate>
+            <form onSubmit={handleSubmit} id='addWarehouse' className="add-warehouse__form-container" noValidate>
                 <div className="add-warehouse__form add-warehouse__form--left">
                     <h3 className="add-warehouse__subtitle">Warehouse Details</h3>
                     <label className="add-warehouse__label">Warehouse Name</label>
@@ -105,4 +88,58 @@ export default class AddWarehouseForm extends Component {
             </div>
         </div>
     )
-}}
+}
+
+// export default class AddWarehouseForm extends Component {
+
+//     handleSubmit = (event) => {
+//         event.preventDefault();
+
+//         const validRegexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//         const validRegexPhone = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g
+
+//         if (!event.target.name.value || !event.target.address.value || !event.target.city.value || !event.target.country.value || !event.target.contactName.value ||!event.target.position.value || !event.target.phone.value || !event.target.email.value ){
+//            const input = document.getElementsByTagName('input');
+//             for (let i = 0; i < input.length; i++) {
+//             input[i].style.borderColor = "red";
+//             }
+
+
+//         const span = document.getElementsByTagName('span');
+//         for (let i = 0; i<span.length; i++) {
+//             console.log(span[i])
+//             span[i].classList.remove("form-valid");
+//             span[i].classList.add("form-error")
+//         }
+
+//            return alert("Please fill in all values.");
+//         };
+//         if (!event.target.phone.value.match(validRegexPhone)) {
+//             return alert("Please enter valid phone number!")
+//         }
+//         if (!event.target.email.value.match(validRegexEmail)) {
+//             return alert("Please enter valid email: example@email.com");
+//         }
+//            axios.post(`${apiUrl}/warehouses`, {
+//             name: event.target.name.value,
+//             address: event.target.address.value,
+//             city: event.target.city.value,
+//             country: event.target.country.value,
+//             contact: {
+//                 name: event.target.contactName.value,
+//                 position: event.target.position.value,
+//                 phone: event.target.phone.value,
+//                 email: event.target.email.value
+//             }
+
+//         }).then(response => {
+//             alert("Warehouse added 👌")
+//         }).then(response => {
+//             this.props.history.push('/warehouses');
+//         })
+//     };
+
+
+
+//     render(){
+

@@ -115,11 +115,11 @@
     line-height: 1.375rem;
   }
 }
-@media screen and (min-width: 80rem) {
+/* @media screen and (min-width: 80rem) {
   .hero__button {
-    width: 25%;
-  }
+    /* width: 25%; */
+  } */
 }
 .hero__button:hover {
   background-color: #232940;
-}/*# sourceMappingURL=HeroWithSearch.css.map */
+}

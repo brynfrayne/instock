@@ -8,7 +8,7 @@ import editIcon from "../../assets/icons/edit-24px.svg";
 import closeIcon from "../../assets/icons/close-24px.svg";
 import { Link } from "react-router-dom";
 
-function WarehouseListColumn({
+export default function WarehouseListColumn({
   id,
   name,
   address,
@@ -21,6 +21,13 @@ function WarehouseListColumn({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [WarehouseName, setName] = useState("Hello");
   const [WarehouseId, setId] = useState();
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const handleDelete = () => {
+    axios.delete(`${apiUrl}/warehouses/${WarehouseId}`);
+    alert("Warehouse and Associated Inventory Items Successfully Deleted");
+    window.location.href = "/warehouses";
+  }
 
   return (
     <section className="warehouse-list">
@@ -104,7 +111,7 @@ function WarehouseListColumn({
         <h1> {`Delete ${WarehouseName} warehouse`}</h1>
 
         <span>
-          {`Please confirm that you'd like to delete 
+          {`Please confirm that you'd like to delete
               ${WarehouseName} from the warehouses list. You won't be able to undo this action`}
         </span>
         <div className="warehouse-modal__buttons">
@@ -116,13 +123,7 @@ function WarehouseListColumn({
           </button>
           <button
             className="warehouse-modal__buttons--delete"
-            onClick={() => {
-              axios.delete(`http://localhost:8080/warehouses/${WarehouseId}`);
-              alert(
-                "Warehouse and Associated Inventory Items Successfully Deleted"
-              );
-              window.location.href = "/warehouses";
-            }}
+            onClick={handleDelete}
           >
             Delete
           </button>
@@ -132,4 +133,3 @@ function WarehouseListColumn({
   );
 }
 
-export default WarehouseListColumn;

@@ -16,6 +16,7 @@ function InventoryList({ inventories, specificWarehouse }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [name, setName] = useState();
   const [itemId, setId] = useState();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   if (inventories === undefined) {
     return <span>Loading...</span>;
@@ -114,7 +115,7 @@ function InventoryList({ inventories, specificWarehouse }) {
         />
         <h1> {`Delete Inventory ${name}  Item`}</h1>
         <span>
-          {`Please confirm that you'd like to delete 
+          {`Please confirm that you'd like to delete
               ${name} from the inventory list. You won't be able to undo this action`}
         </span>
         <div className="inventory-modal__buttons">
@@ -127,7 +128,7 @@ function InventoryList({ inventories, specificWarehouse }) {
           <button
             className="inventory-modal__buttons--delete"
             onClick={() => {
-              axios.delete(`http://localhost:8080/inventory/${itemId}`);
+              axios.delete(`${apiUrl}/inventory/${itemId}`);
               alert("Item Successfully Deleted");
               window.location.href = "/inventory";
             }}

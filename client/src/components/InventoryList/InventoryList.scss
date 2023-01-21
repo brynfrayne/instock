@@ -115,6 +115,9 @@
   padding-left: 1rem;
   background-color: $color-global-white;
   border-bottom: 1px solid $color-outlines-dividers;
+  @include desktop {
+    justify-content: space-between;
+  }
 
   &:hover {
     background-color: rgba(46, 102, 230, 0.07);
@@ -133,6 +136,9 @@
     justify-content: space-around;
     flex-wrap: none;
     width: 10%;
+  }
+  @include desktop {
+    width: 33%;
   }
 
   &__delete {
@@ -160,6 +166,10 @@
     width: 40%;
 
     margin-right: 0rem;
+  }
+  @include desktop {
+    width: 33%;
+    justify-content: space-around;
   }
 
   &__item-container {

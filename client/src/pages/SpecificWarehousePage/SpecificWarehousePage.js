@@ -1,47 +1,40 @@
-import React, { Component } from 'react';
-import HeroVanilla from '../../components/HeroVanilla/HeroVanilla';
+import React, { useState, useEffect } from 'react';
 import WarehouseDetails from '../../components/WarehouseDetails/WarehouseDetails';
 import TableHeader from '../../components/TableHeader/TableHeader';
 import InventoryList from '../../components/InventoryList/InventoryList';
 import axios from 'axios';
 
-class SpecificWarehousePage extends Component {
+export default function SpecificWarehousePage({match}) {
+    const [warehouse, setWarehouse] = useState(null);
+    const [inventory, setInventory] = useState([]);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-    state = {
-        warehouse: null,
-        inventory: []
-    }
+    useEffect(() => {
+        const id = match.params.warehouseId;
+        axios.get(`${apiUrl}/warehouses/${id}`)
+        .then((response) => {
+            setWarehouse(response.data);
+        });
+        axios.get(`${apiUrl}/inventory/${id}`)
+        .then((response) => {
+            setInventory(response.data);
+        });
+    }, []);
 
-      componentDidMount() {
-        // console.log(this.props.match.params.warehouseId);
-        axios.get("http://localhost:8080/warehouses/" + this.props.match.params.warehouseId).then((response) => {
-        this.setState({ 
-          warehouse: response.data 
-        })
-      })
-        .then( result => {
-        axios.get('http://localhost:8080/inventory/' + this.props.match.params.warehouseId)
-            .then((response) => {
-                this.setState({
-                    inventory: response.data
-                });
-            });
-          });
-        };
 
-    render() {
-
-      if (this.state.warehouse === null) {
-        return <p>Choo chooo, Here We Go!!</p>
-      }
-        return (
-            <div className="main">
-                <WarehouseDetails warehouse={this.state.warehouse}/>
-                <TableHeader titles={["warehouse", "address", "contact name", "contact information", "actions"]}/>
-                <InventoryList inventories={this.state.inventory} specificWarehouse={this.props.match.params} />
-            </div>
-        )
-    }
+    return (
+      <div>
+        {!warehouse ? (
+          <p>Loading...</p>
+        ) : (
+        <div className="main">
+            <WarehouseDetails warehouse={this.state.warehouse}/>
+            <TableHeader titles={["warehouse", "address", "contact name", "contact information", "actions"]}/>
+            <InventoryList inventories={this.state.inventory} specificWarehouse={this.props.match.params} />
+        </div>
+        )}
+      </div>
+    );
 }
 
-export default SpecificWarehousePage;
+
