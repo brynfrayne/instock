@@ -3,24 +3,25 @@
 @use "../../styles/partials/global" as*;
 
 
-.main {
-    position: relative;
-    bottom: 3rem;
-    margin: 0 1rem;
-    border-radius: .25rem;
-    overflow: hidden;
-    background-color: $color-global-white;
-    box-shadow: 0 1px 2px;
-    border-color: none;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    @include tablet {
-        margin: 0 2rem;
-        bottom: 5rem;
-    }
-    @include desktop {
-        margin: 0 10rem;
-    }
-}
+// .main {
+//     position: relative;
+//     bottom: 3rem;
+//     margin: 0 1rem;
+//     border-radius: .25rem;
+//     overflow: hidden;
+//     background-color: $color-global-white;
+//     box-shadow: 0 1px 2px;
+//     border-color: none;
+//     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+//     @include tablet {
+//         margin: 0 2rem;
+//         bottom: 5rem;
+//         position: initial;
+//     }
+//     @include desktop {
+//         margin: 0 10rem;
+//     }
+// }
 .add-warehouse {
     &__header {
         display: flex;
@@ -35,7 +36,7 @@
     &__form {
         display: flex;
         flex-direction: column;
-        
+
         padding-bottom: 1rem;
         @include tablet {
             width: 50%;
@@ -50,13 +51,13 @@
     &__form-container {
         @include tablet {
             display: flex;
-            width: 100%;    
+            width: 100%;
         }
     }
     &__back-icon {
         width: 1.125rem;
     }
-    
+
     &__input {
         border-radius: 1rem;
         border: 1px solid $color-outlines-dividers;
@@ -88,7 +89,7 @@
             padding: .375rem 1rem;
             border-radius: 2rem;
         }
-        
+
         &--blue {
             background-color: $color-interactive-elements;
             color: $color-global-white;
@@ -103,7 +104,7 @@
         padding: 1rem;
         @include tablet {
             justify-content: flex-end;
-            
+
         }
     }
 }

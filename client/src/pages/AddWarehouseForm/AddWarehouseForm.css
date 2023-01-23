@@ -38,6 +38,7 @@ body {
   .main {
     margin: 0 2rem;
     bottom: 5rem;
+    position: initial;
   }
 }
 @media screen and (min-width: 80rem) {
