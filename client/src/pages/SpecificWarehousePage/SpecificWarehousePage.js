@@ -31,7 +31,7 @@ export default function SpecificWarehousePage({match}) {
         <div className="main">
             <WarehouseDetails warehouse={warehouse}/>
             <TableHeader titles={["warehouse", "address", "contact name", "contact information", "actions"]}/>
-            <InventoryList inventories={inventory} specificWarehouse={params} />
+            <InventoryList inventories={inventory} specificWarehouse={warehouseId} />
         </div>
         )}
       </div>
