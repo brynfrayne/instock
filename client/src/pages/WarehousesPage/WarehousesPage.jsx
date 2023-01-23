@@ -26,7 +26,7 @@ export default function WarehousesPage() {
           <div className="main">
             <HeroWithSearch title={"Warehouses"}/>
             <TableHeader titles={["warehouse", "address", "contact name", "contact information", "actions"]}/>
-            <WarehouseListTable warehouses={this.state.warehouseList}/>
+            <WarehouseListTable warehouses={warehouseList}/>
           </div>
         </main>
     )

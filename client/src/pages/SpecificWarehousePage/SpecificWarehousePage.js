@@ -7,6 +7,7 @@ import axios from 'axios';
 export default function SpecificWarehousePage({match}) {
     const [warehouse, setWarehouse] = useState(null);
     const [inventory, setInventory] = useState([]);
+    const { warehouseId } = match.params;
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -28,9 +29,9 @@ export default function SpecificWarehousePage({match}) {
           <p>Loading...</p>
         ) : (
         <div className="main">
-            <WarehouseDetails warehouse={this.state.warehouse}/>
+            <WarehouseDetails warehouse={warehouse}/>
             <TableHeader titles={["warehouse", "address", "contact name", "contact information", "actions"]}/>
-            <InventoryList inventories={this.state.inventory} specificWarehouse={this.props.match.params} />
+            <InventoryList inventories={inventory} specificWarehouse={params} />
         </div>
         )}
       </div>

@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 export default function InventoryItemPage({match}) {
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
+    const { itemId } = match.params;
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -24,16 +25,16 @@ export default function InventoryItemPage({match}) {
                 <span>Loading...</span>
             ) : (
         <div className="main">
-           <InventoryItemHero  title={this.state.item.itemName} inventoryId={this.props.match.params.itemId}/>
+           <InventoryItemHero  title={item.itemName} inventoryId={itemId}/>
             <div className="inventory-item">
                 <div className="inventory-item__columns inventory-item__columns--left">
                     <div>
                         <p className="inventory-item__text--title">ITEM DESCRIPTION</p>
-                        <p className="inventory-item__text">{this.state.item.description}</p>
+                        <p className="inventory-item__text">{item.description}</p>
                     </div>
                     <div>
                         <p className="inventory-item__text--title">CATEGORY</p>
-                        <p className="inventory-item__text">{this.state.item.category}</p>
+                        <p className="inventory-item__text">{item.category}</p>
                     </div>
                 </div>
 
@@ -41,16 +42,16 @@ export default function InventoryItemPage({match}) {
                     <div className="inventory-item__status-quantity-container">
                         <div className="inventory-item__status-quantity">
                             <p className="inventory-item__text--title" >STATUS</p>
-                            <p className="inventory-item__text">{this.state.item.status}</p>
+                            <p className="inventory-item__text">{item.status}</p>
                         </div>
                         <div className="inventory-item__status-quantity">
                             <p className="inventory-item__text--title">QUANTITY</p>
-                            <p className="inventory-item__text">{this.state.item.quantity}</p>
+                            <p className="inventory-item__text">{item.quantity}</p>
                         </div>
                     </div>
                     <div>
                         <p className="inventory-item__text--title">WAREHOUSE</p>
-                        <p className="inventory-item__text">{this.state.item.warehouseName}</p>
+                        <p className="inventory-item__text">{item.warehouseName}</p>
                     </div>
                 </div>
             </div>
