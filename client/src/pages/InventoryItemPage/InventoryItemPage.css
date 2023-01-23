@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "Titillium Web";
+  src: url("../../assets/font/TitilliumWeb-SemiBold.woff2") format("woff2"), url("../../assets/font/TitilliumWeb-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Titillium Web";
+  src: url("../../assets/font/TitilliumWeb-Regular.woff2") format("woff2"), url("../../assets/font/TitilliumWeb-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.inventory-item__text {
+  font-size: 0.625rem;
+  font-weight: 300;
+  color: #5C667E;
+}
+.inventory-item__text--title {
+  font-weight: 500;
+  color: #5C667E;
+  font-size: 0.625rem;
+}
+.inventory-item__columns {
+  margin: 0 0.5rem;
+}
+.inventory-item__status-quantity {
+  width: 50%;
+}
+.inventory-item__status-quantity-container {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=InventoryItemPage.css.map */
