@@ -1,7 +1,6 @@
 import React from 'react'
 import HeroVanilla from '../../components/HeroVanilla/HeroVanilla';
 import ItemForm from "../../components/ItemForm/ItemForm";
-import "./EditInvItemPage.scss";
 
 function EditInvItemPage(props) {
     return (
