@@ -4,6 +4,9 @@
 InStock is a full-stack CRUD (Create, Read, Update, Delete) application that helps manage a warehouse's inventory. This application was developed using React, Node.js, and Express, and is intended for anyone who needs a solution to efficiently manage inventory in a warehouse setting.
 
 The application was built using Agile methodologies and tooling such as Jira and GitHub. Tasks were divided into tickets, which made it easy to assign them to team members and track progress throughout the development process.
+
+It was built over a 1 week sprint during my time in Brainstation's Web Dev bootcamp, and involved me working with 3 other developers, remotely.
+
 ## Tech Stack
 
 **Client:** React, SASS
